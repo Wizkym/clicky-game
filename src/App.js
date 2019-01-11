@@ -1,28 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import chars from "./chars";
+import Wrapper from "./components/Wrapper";
+import Chars from "./components/Chars";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+  state = {
+    chars
+  };
+
+  shuffleCards = (id) => {
+    console.log("THIS IS SHUFFLE", id);
+  };
+
+    render() {
+        return (
+            <Wrapper>
+              <div className="row">
+                  {this.state.chars.map(char=> (
+                      <Chars
+                          removeFriend={this.shuffleCards}
+                          id={char.id}
+                          key={char.id}
+                          name={char.name}
+                          image={char.image}
+                          occupation={char.occupation}
+                          location={char.location}
+                      />
+                  ))}
+              </div>
+            </Wrapper>
+        );
+    }
 }
 
 export default App;
