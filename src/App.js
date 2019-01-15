@@ -13,20 +13,24 @@ class App extends Component {
         status: ""
     };
 
-    //shuffle the pup cards in the browser when clicked
+    // Shuffle the pup cards in the browser when clicked
     shuffleCards = id => {
         let clickedCharIds = this.state.clickedCharIds;
 
+        // If the clicked array contains the id of the clicked card ==> Game Over!!
         if(clickedCharIds.includes(id)){
             this.setState({ clickedCharIds: [], score: 0, status:  "Game Over! You lost. Click to play again!" });
             return;
         }else{
+            // If the id is not in the array, add it
             clickedCharIds.push(id);
 
+            // if all the cards have been clicked without repetition ==> You Win!!
             if(clickedCharIds.length === 12){
-                this.setState({score: 8, status: "You Won! Great Job!! Click to play again!", clickedCharIds: []});
+                this.setState({score: 12, status: "You Won! Great Job!! Click to play again!", clickedCharIds: []});
                 return;
             }
+            // Shuffle
             this.setState({ chars, clickedCharIds, score: clickedCharIds.length, status: " " });
             for (let i = chars.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
